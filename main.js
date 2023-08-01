@@ -2,7 +2,7 @@ let currentWord = document.querySelector("#current-word");
 let wordInput = document.querySelector("#word-input");
 let timer = document.querySelector("#time");
 let scoreDisplay = document.querySelector("#score");
-
+let intervalId;
 let s = 0
 let time = 5
 
@@ -25,7 +25,7 @@ window.addEventListener("DOMContentLoaded",function(){
 
     showWord();
     wordInput.addEventListener("input",match)
-    setInterval(count,1000)
+    intervalId=setInterval(count,1000)
 })
 
 
@@ -52,9 +52,27 @@ function match(e){
 
 function count() {
 
-    if(time >= 0){
+    if(time > 0){
+        time--
+
         timer.innerHTML = time
-    time--
+    }
+
+    else if(time==0){
+        let pan = document.getElementById("message")
+        pan.innerHTML="GAME OVER"
+        clearInterval(intervalId);
+        console.log("close")
+
+
+
+        document.getElementById("word-input").style.display="none";
+
+
+
+
+         
     }
     
 }
+ 
